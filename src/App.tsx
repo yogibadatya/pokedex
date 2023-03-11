@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import FullNamePage from "./pages/FullNamePage";
+import BirthDatePage from "./pages/BirthDatePage";
+import PokemonListPage from "./pages/PokemonListPage";
+import PokemonDetails from "./pages/PokemonDetails";
+import { ColorModeScript } from "@chakra-ui/color-mode";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<FullNamePage />} />
+          <Route path="/birthdate" element={<BirthDatePage />} />
+          <Route path="/pokemons" element={<PokemonListPage limit={12} />} />
+          <Route path="/pokemon/:name" element={<PokemonDetails />} />
+        </Routes>
+      </Router>
+      <ColorModeScript initialColorMode="dark" />
+    </ChakraProvider>
   );
-}
+};
 
 export default App;
